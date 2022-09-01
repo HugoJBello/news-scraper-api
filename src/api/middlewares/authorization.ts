@@ -8,6 +8,8 @@ export default async function authorization(
   next: NextFunction
 ): Promise<void> {
   const authorization = String(req.headers['x-authorization']);
+  next();
+
   if (!authorization || !authorization.includes('Bearer')) {
     res.status(401).send({
       status: false,

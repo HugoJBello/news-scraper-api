@@ -17,25 +17,16 @@ User.init(
     },
     is_active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
-      allowNull: false
     },
     created_at: {
       type: DataTypes.DATE,
-      defaultValue: Sequelize.fn('now'),
-      allowNull: false
     },
     created_by: {
       type: DataTypes.STRING,
-      defaultValue: 'system',
-      allowNull: false
     }
   },
   {
     modelName: 'user',
-    freezeTableName: true,
-    createdAt: false,
-    updatedAt: false,
     sequelize: db
   }
 );
