@@ -14,3 +14,12 @@ export function findOne(params: { id: string }): Promise<NewScrapedSql> {
     }
   });
 }
+
+
+export const findQuery = async (query:any, order: any,  offset: number, limit: number) =>  {
+
+      console.log(query, order)
+      const  {count, rows} = await newScrapedRepository.findQuery(query, order, offset, limit);
+      console.log({count, rows})
+      return {count, rows}
+}
