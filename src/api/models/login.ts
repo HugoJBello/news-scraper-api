@@ -10,25 +10,25 @@ Login.init(
       primaryKey: true
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     user_id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUID
     },
     is_verify: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN
     },
     is_active: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN
     },
     created_at: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE
     },
     created_by: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     }
   },
   {

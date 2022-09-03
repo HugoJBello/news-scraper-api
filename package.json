@@ -10,7 +10,7 @@
     "build": "npm run test && tsc",
     "build-only": "tsc",
     "build-watch": "tsc -w",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts --fix",
     "prettier-format": "prettier --config .prettierrc --write .",
     "test": "mocha --check-leaks -r dotenv/config -r ts-node/register '**/**/*.spec.ts'",
     "coverage": "nyc npm run test"

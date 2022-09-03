@@ -1,4 +1,4 @@
-import { newsScrapedService } from '../services';
+import { scrapingUrlService } from '../services';
 import { userValidation } from '../validations';
 import { Request, Response } from 'express';
 import Logger from '../lib/logger';
@@ -7,7 +7,7 @@ export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
   if (params.id) {
     const id: string = params.id as string;
-    const result = await newsScrapedService.findOne({ id }).catch((err) => {
+    const result = await scrapingUrlService.findOne({ id }).catch((err) => {
       Logger.error(err);
       res.status(400);
     });
@@ -20,7 +20,7 @@ export async function get(req: Request, res: Response): Promise<void> {
   }
 }
 
-//http://localhost:3000/api/v1/newScraped/findQuery?newspaper=eldiario.es&limit=6&orderByParam=createdAt&orderDirection=DESC
+//http://localhost:3000/api/v1/scrapingUrl/findQuery?newspaper=eldiario.es&limit=6&orderByParam=createdAt&orderDirection=DESC
 export const findQuery = async (req: Request, res: Response): Promise<void> => {
   const params = req.query;
 
@@ -61,7 +61,7 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
   const query = params;
 
   try {
-    const result = await newsScrapedService.findQuery(
+    const result = await scrapingUrlService.findQuery(
       query,
       order,
       offset,

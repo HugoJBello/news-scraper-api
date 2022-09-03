@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { newScrapedRepository } from '../repositories';
-import { NewScrapedSql } from '../models/NewScrapedSql';
+import { scrapingIndex } from '../repositories';
+import { ScrapingIndexSql } from '../models/ScrapingIndexSql';
 
-export function findOne(params: { id: string }): Promise<NewScrapedSql> {
+export function findOne(params: { id: string }): Promise<ScrapingIndexSql> {
   return new Promise(async (resolve, reject) => {
     try {
       console.log(params);
-      const news = await newScrapedRepository.findOne(params.id);
+      const news = await scrapingIndex.findOne(params.id);
       console.log(news);
       resolve(news);
     } catch (err) {
@@ -23,7 +23,7 @@ export const findQuery = async (
   limit: number
 ) => {
   console.log(query, order);
-  const { count, rows } = await newScrapedRepository.findQuery(
+  const { count, rows } = await scrapingIndex.findQuery(
     query,
     order,
     offset,

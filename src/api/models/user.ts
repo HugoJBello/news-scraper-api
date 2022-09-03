@@ -16,13 +16,13 @@ User.init(
       type: DataTypes.STRING
     },
     is_active: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN
     },
     created_at: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE
     },
     created_by: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     }
   },
   {
