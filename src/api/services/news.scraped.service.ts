@@ -22,7 +22,6 @@ export const findQuery = async (
   offset: number,
   limit: number
 ) => {
-  console.log(query, order);
   const { count, rows } = await newScrapedRepository.findQuery(
     query,
     order,

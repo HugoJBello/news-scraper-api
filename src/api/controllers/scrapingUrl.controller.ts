@@ -39,7 +39,7 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
 
   let order;
   if (orderByParam && orderDirection) {
-    order = [orderByParam, orderDirection];
+    order = [[orderByParam, orderDirection]];
   }
 
   let limit;

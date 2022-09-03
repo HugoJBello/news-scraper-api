@@ -32,17 +32,15 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
 
   //'DESC' or 'ASC'
   let orderDirection;
-  console.log(params);
   
   if (params.orderDirection) {
     orderDirection = params.orderDirection;
     delete params.orderDirection;
   }
-  console.log(params);
 
   let order;
   if (orderByParam && orderDirection) {
-    order = [orderByParam, orderDirection];
+    order = [[orderByParam, orderDirection]];
   }
 
   let limit;
@@ -62,6 +60,8 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
   }
 
   const query = params;
+  console.log(query);
+  
 
   try {
     const result = await newsScrapedService.findQuery(
