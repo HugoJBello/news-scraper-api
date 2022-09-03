@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GlobalConfigSql } from '../models/GlobalConfigSql';
+import {
+  GlobalConfigSql,
+  GlobalConfigSqlSqlI
+} from '../models/GlobalConfigSql';
 
 export async function findOne(id: string): Promise<GlobalConfigSql> {
   return await GlobalConfigSql.findOne({ where: { id: id } } as any);
@@ -26,3 +30,20 @@ export async function findQuery(
     } as any);
   }
 }
+
+export const saveOrUpdate = async (globalConfig: GlobalConfigSqlSqlI) => {
+  const conditions = {
+    scraperId: globalConfig.scraperId
+  };
+  try {
+    const found = await GlobalConfigSql.findOne({ where: conditions });
+    if (found) {
+      await GlobalConfigSql.update(globalConfig, { where: conditions });
+    } else {
+      await GlobalConfigSql.create(globalConfig);
+    }
+  } catch (e) {
+    console.log('error updating config');
+    throw e;
+  }
+};

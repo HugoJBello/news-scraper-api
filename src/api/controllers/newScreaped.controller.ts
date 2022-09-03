@@ -2,6 +2,7 @@ import { newsScrapedService } from '../services';
 import { userValidation } from '../validations';
 import { Request, Response } from 'express';
 import Logger from '../lib/logger';
+import { NewScrapedI } from '../models/NewScraped';
 
 export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
@@ -32,7 +33,7 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
 
   //'DESC' or 'ASC'
   let orderDirection;
-  
+
   if (params.orderDirection) {
     orderDirection = params.orderDirection;
     delete params.orderDirection;
@@ -61,7 +62,6 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
 
   const query = params;
   console.log(query);
-  
 
   try {
     const result = await newsScrapedService.findQuery(
@@ -70,6 +70,29 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
       offset,
       limit
     );
+    res.status(200).send({
+      success: true,
+      payload: result
+    });
+  } catch (e) {
+    Logger.error(e);
+
+    res.status(400).send({
+      success: false,
+      error: e
+    });
+  }
+};
+
+//http://localhost:3000/api/v1/newScraped/saveOrUpdate
+export const saveOrUpdate = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const obj = req.body as NewScrapedI;
+
+  try {
+    const result = await newsScrapedService.saveOrUpdate(obj);
     res.status(200).send({
       success: true,
       payload: result

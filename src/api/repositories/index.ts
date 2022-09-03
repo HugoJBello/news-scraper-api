@@ -3,7 +3,7 @@ import * as loginRepository from './login.repository';
 import * as newScrapedRepository from './newScraped.repository';
 import * as scrapingIndex from './scrapingIndex.repository';
 import * as scrapingUrl from './scrapingUrl.repository';
-import * as globalConfig from './globalConfig.repository';
+import * as globalConfigRepository from './globalConfig.repository';
 
 export {
   userRepository,
@@ -11,5 +11,5 @@ export {
   newScrapedRepository,
   scrapingIndex,
   scrapingUrl,
-  globalConfig
+  globalConfigRepository
 };

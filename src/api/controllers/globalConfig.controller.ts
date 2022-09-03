@@ -2,6 +2,7 @@ import { globalConfigService } from '../services';
 import { userValidation } from '../validations';
 import { Request, Response } from 'express';
 import Logger from '../lib/logger';
+import { GlobalConfigSqlSqlI } from '../models/GlobalConfigSql';
 
 export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
@@ -67,6 +68,29 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
       offset,
       limit
     );
+    res.status(200).send({
+      success: true,
+      payload: result
+    });
+  } catch (e) {
+    Logger.error(e);
+
+    res.status(400).send({
+      success: false,
+      error: e
+    });
+  }
+};
+
+//http://localhost:3000/api/v1/globalConfig/saveOrUpdate
+export const saveOrUpdate = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const obj = req.body as GlobalConfigSqlSqlI;
+
+  try {
+    const result = await globalConfigService.saveOrUpdate(obj);
     res.status(200).send({
       success: true,
       payload: result

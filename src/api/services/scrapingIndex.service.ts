@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { scrapingIndex } from '../repositories';
 import { ScrapingIndexSql } from '../models/ScrapingIndexSql';
+import { ScrapingIndexI } from '../models/ScrapingIndex';
 
 export function findOne(params: { id: string }): Promise<ScrapingIndexSql> {
   return new Promise(async (resolve, reject) => {
@@ -31,4 +32,8 @@ export const findQuery = async (
   );
   console.log({ count, rows });
   return { count, rows };
+};
+
+export const saveOrUpdate = async (index: ScrapingIndexI) => {
+  scrapingIndex.saveOrUpdate(index);
 };

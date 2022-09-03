@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { newScrapedRepository } from '../repositories';
 import { NewScrapedSql } from '../models/NewScrapedSql';
+import { NewScrapedI } from '../models/NewScraped';
 
 export function findOne(params: { id: string }): Promise<NewScrapedSql> {
   return new Promise(async (resolve, reject) => {
@@ -30,4 +31,8 @@ export const findQuery = async (
   );
   console.log({ count, rows });
   return { count, rows };
+};
+
+export const saveOrUpdate = async (newScraped: NewScrapedI) => {
+  newScrapedRepository.saveOrUpdate(newScraped);
 };
