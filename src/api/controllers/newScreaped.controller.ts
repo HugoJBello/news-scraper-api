@@ -32,10 +32,13 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
 
   //'DESC' or 'ASC'
   let orderDirection;
+  console.log(params);
+  
   if (params.orderDirection) {
     orderDirection = params.orderDirection;
     delete params.orderDirection;
   }
+  console.log(params);
 
   let order;
   if (orderByParam && orderDirection) {
