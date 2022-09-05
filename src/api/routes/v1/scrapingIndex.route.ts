@@ -12,7 +12,7 @@ route.get('/findQuery', [], (req: Request, res: Response) => {
   scrapingIndexController.findQuery(req, res);
 });
 
-route.get('/saveOrUpdate', [], (req: Request, res: Response) => {
+route.post('/saveOrUpdate', [], (req: Request, res: Response) => {
   scrapingIndexController.saveOrUpdate(req, res);
 });
 
