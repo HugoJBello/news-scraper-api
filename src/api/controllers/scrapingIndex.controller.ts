@@ -3,6 +3,8 @@ import { userValidation } from '../validations';
 import { Request, Response } from 'express';
 import Logger from '../lib/logger';
 import { NewScrapedI } from '../models/NewScraped';
+import { ScrapingConfigI } from '../models/ScrapingConfig';
+import { ScrapingIndexI } from '../models/ScrapingIndex';
 
 export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
@@ -87,10 +89,10 @@ export const saveOrUpdate = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const obj = req.body as NewScrapedI;
+  const obj = req.body as ScrapingIndexI;
 
   try {
-    const result = await newsScrapedService.saveOrUpdate(obj);
+    const result = await scrapingIndexService.saveOrUpdate(obj);
     res.status(200).send({
       success: true,
       payload: result

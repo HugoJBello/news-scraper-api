@@ -79,14 +79,16 @@ export const convertScrapingIndexSqlI = (
   return index as ScrapingIndexI;
 };
 
-export const obtainScrapingIUrlsSqlI = (
-  index: ScrapingIndexI
-): ScrapingUrlsSqlI[] => {
-  return index.startingUrls.map((url) => {
-    const scrapingUrl: ScrapingUrlsSqlI = {} as ScrapingUrlsSqlI;
-    scrapingUrl.url = url;
-    scrapingUrl.newspaper = index.newspaper;
-    scrapingUrl.scraperId = index.scraperId;
-    return scrapingUrl;
-  });
-};
+export const obtainScrapingIUrlsSqlI = (index: ScrapingIndexI): ScrapingUrlsSqlI[] => {
+  const newspaper = index.newspaper
+  const scraperId = index.scraperId
+  
+  return index.startingUrls.map(url => {
+      const scrapingUrl: ScrapingUrlsSqlI = {} as ScrapingUrlsSqlI
+      scrapingUrl.url = url
+      scrapingUrl.newspaper = newspaper
+      scrapingUrl.scraperId = scraperId
+      return scrapingUrl
+  })
+
+}

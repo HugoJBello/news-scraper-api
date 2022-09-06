@@ -48,7 +48,7 @@ export const convertToScrapingIndexSqlI = (
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function saveOrUpdate(index: ScrapingIndexI) {
-  const indexDb = Object.create(index);
+  const indexDb = { ...index } as ScrapingIndexI;
   const conditions = {
     scraperId: indexDb.scraperId,
     newspaper: indexDb.newspaper
