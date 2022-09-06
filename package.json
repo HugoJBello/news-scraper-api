@@ -83,5 +83,9 @@
   "lint-staged": {
     "*.+(ts)": "eslint --fix",
     "*.+(ts|json|md)": "prettier --config .prettierrc --write ."
+  },
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
   }
 }
