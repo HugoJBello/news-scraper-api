@@ -12,6 +12,10 @@ route.get('/findQuery', [], (req: Request, res: Response) => {
   newScrapedController.findQuery(req, res);
 });
 
+route.get('/findNewsInDay', [], (req: Request, res: Response) => {
+  newScrapedController.findNewsInDay(req, res);
+});
+
 route.post('/saveOrUpdate', [], (req: Request, res: Response) => {
   newScrapedController.saveOrUpdate(req, res);
 });
