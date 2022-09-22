@@ -1,87 +1,90 @@
-
-
-import {DataTypes, Model} from 'sequelize';
-import {NewScrapedI} from "./NewScraped";
+import { DataTypes, Model } from 'sequelize';
+import { NewScrapedI } from './NewScraped';
 
 export interface NewScrapedSqlI {
-    newspaper: string
-    author: string
-    description: string
-    image: string
-    date: Date
-    scrapedAt: Date
-    content: string
-    headline: string
-    tags: string
-    url: string
-    scraperId: string
-    id: string
-    newsIndex: number
+  newspaper: string;
+  author: string;
+  description: string;
+  image: string;
+  date: Date;
+  scrapedAt: Date;
+  content: string;
+  headline: string;
+  tags: string;
+  url: string;
+  scraperId: string;
+  id: string;
+  newsIndex: number;
 }
 
-export class NewScrapedSql extends Model<NewScrapedSqlI> {
-}
+export class NewScrapedSql extends Model<NewScrapedSqlI> {}
 
 export const newScrapedSqlAttributes = {
-    id: {
-        type: DataTypes.STRING,
-        primaryKey: true
-    },
-    newspaper: {
-        type: DataTypes.STRING,
-    },
-    author: {
-        type: DataTypes.STRING,
-    },
-    description: {
-        type: DataTypes.STRING,
-    },
-    image: {
-        type: DataTypes.STRING,
-    },
-    date: {
-        type: DataTypes.DATE,
-    },
-    scrapedAt: {
-        type: DataTypes.DATE,
-    },
-    content: {
-        type: DataTypes.STRING,
-    },
-    headline: {
-        type: DataTypes.STRING,
-    },
-    tags:{
-        type: DataTypes.STRING,
-    },
-    url: {
-        type: DataTypes.STRING,
-    },
-    scraperId: {
-        type: DataTypes.STRING,
-    },
-    newsIndex: {
-        type: DataTypes.NUMBER,
-    }
-} as any
+  id: {
+    type: DataTypes.STRING,
+    primaryKey: true
+  },
+  newspaper: {
+    type: DataTypes.STRING
+  },
+  author: {
+    type: DataTypes.STRING
+  },
+  description: {
+    type: DataTypes.STRING
+  },
+  image: {
+    type: DataTypes.STRING
+  },
+  date: {
+    type: DataTypes.DATE
+  },
+  scrapedAt: {
+    type: DataTypes.DATE
+  },
+  content: {
+    type: DataTypes.STRING
+  },
+  contentMarkdown: {
+    type: DataTypes.STRING
+  },
+  headline: {
+    type: DataTypes.STRING
+  },
+  tags: {
+    type: DataTypes.STRING
+  },
+  url: {
+    type: DataTypes.STRING
+  },
+  scraperId: {
+    type: DataTypes.STRING
+  },
+  newsIndex: {
+    type: DataTypes.NUMBER
+  }
+} as any;
 
-export const joiningStrtags = ","
+export const joiningStrtags = ',';
 
+export const convertToNewsScrapedSqlI = (
+  newScrapedI: NewScrapedI
+): NewScrapedSqlI => {
+  const newScrapedSql = newScrapedI as any;
+  if (newScrapedSql.tags && Array.isArray(newScrapedSql.tags)) {
+    const tags = newScrapedSql.tags;
+    newScrapedSql.tags = tags.join(joiningStrtags);
+  }
+  return newScrapedSql as NewScrapedSqlI;
+};
 
-export const convertToNewsScrapedSqlI = (newScrapedI: NewScrapedI): NewScrapedSqlI => {
-    const newScrapedSql = newScrapedI as any
-    if (newScrapedSql.tags && Array.isArray(newScrapedSql.tags)){
-        const tags = newScrapedSql.tags
-        newScrapedSql.tags =  tags.join(joiningStrtags)
-    }
-    return newScrapedSql as NewScrapedSqlI
-}
-
-export const convertNewsScrapedSqlI = (newScrapedSqlI: NewScrapedSqlI): NewScrapedI => {
-    const index = newScrapedSqlI as any
-    if (newScrapedSqlI.tags.includes(joiningStrtags)) {
-        const tags = newScrapedSqlI.tags
-        index.tags =  tags.split(joiningStrtags)
-    }
-    return index as NewScrapedI
-}
+export const convertNewsScrapedSqlI = (
+  newScrapedSqlI: NewScrapedSqlI
+): NewScrapedI => {
+  const index = newScrapedSqlI as any;
+  if (newScrapedSqlI.tags.includes(joiningStrtags)) {
+    const tags = newScrapedSqlI.tags;
+    index.tags = tags.split(joiningStrtags);
+  }
+  return index as NewScrapedI;
+};
