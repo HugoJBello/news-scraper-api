@@ -14,6 +14,7 @@ export interface ScrapingIndexSqlI {
   scraperId: string;
   deviceId: string;
   id: number;
+  scrapingIteration: number;
 }
 
 export const scrapingIndexSqlAttributes = {
@@ -29,7 +30,7 @@ export const scrapingIndexSqlAttributes = {
     type: DataTypes.NUMBER
   },
   pageNewIndex: {
-    type: DataTypes.STRING
+    type: DataTypes.NUMBER
   },
   pageIndexSection: {
     type: DataTypes.NUMBER
@@ -51,6 +52,9 @@ export const scrapingIndexSqlAttributes = {
   },
   deviceId: {
     type: DataTypes.STRING
+  },
+  scrapingIteration: {
+    type: DataTypes.NUMBER
   }
 };
 
@@ -79,16 +83,17 @@ export const convertScrapingIndexSqlI = (
   return index as ScrapingIndexI;
 };
 
-export const obtainScrapingIUrlsSqlI = (index: ScrapingIndexI): ScrapingUrlsSqlI[] => {
-  const newspaper = index.newspaper
-  const scraperId = index.scraperId
-  
-  return index.startingUrls.map(url => {
-      const scrapingUrl: ScrapingUrlsSqlI = {} as ScrapingUrlsSqlI
-      scrapingUrl.url = url
-      scrapingUrl.newspaper = newspaper
-      scrapingUrl.scraperId = scraperId
-      return scrapingUrl
-  })
+export const obtainScrapingIUrlsSqlI = (
+  index: ScrapingIndexI
+): ScrapingUrlsSqlI[] => {
+  const newspaper = index.newspaper;
+  const scraperId = index.scraperId;
 
-}
+  return index.startingUrls.map((url) => {
+    const scrapingUrl: ScrapingUrlsSqlI = {} as ScrapingUrlsSqlI;
+    scrapingUrl.url = url;
+    scrapingUrl.newspaper = newspaper;
+    scrapingUrl.scraperId = scraperId;
+    return scrapingUrl;
+  });
+};

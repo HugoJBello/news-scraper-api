@@ -11,6 +11,7 @@ export interface NewScrapedI {
   tags: string[];
   url: string;
   scraperId: string;
+  scrapingIteration: number;
   id: string;
   newsIndex: number;
 }

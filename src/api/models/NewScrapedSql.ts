@@ -13,6 +13,7 @@ export interface NewScrapedSqlI {
   tags: string;
   url: string;
   scraperId: string;
+  scrapingIteration: number;
   id: string;
   newsIndex: number;
 }
@@ -61,6 +62,9 @@ export const newScrapedSqlAttributes = {
     type: DataTypes.STRING
   },
   newsIndex: {
+    type: DataTypes.NUMBER
+  },
+  scrapingIteration: {
     type: DataTypes.NUMBER
   }
 } as any;

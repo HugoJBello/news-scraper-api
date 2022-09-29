@@ -40,40 +40,37 @@ export async function findNewsDay(
   orderCriteria: string,
   daysInterval: string
 ): Promise<{ count: number; rows: NewScrapedSql[] }> {
-  let endDate = day as any
+  const endDate = day as any;
   //endDate = moment(endDate).format('YYYY-MM-DD').split(" ")[0];
-  const daysIntervalInt = parseInt(daysInterval)
-  console.log("-----", daysInterval)
+  const daysIntervalInt = parseInt(daysInterval);
+  console.log('-----', daysInterval);
 
-  let startDate = new Date(endDate.getTime())  as any
-  startDate =  new Date(startDate.setDate(startDate.getDate()-daysIntervalInt));
+  let startDate = new Date(endDate.getTime()) as any;
+  startDate = new Date(
+    startDate.setDate(startDate.getDate() - daysIntervalInt)
+  );
   //startDate = moment(startDate).format('YYYY-MM-DD').split(" ")[0];
   const query = {
-    "newspaper": newspaper,
-    "date": {
-      [Op.lt] : endDate,
-      [Op.gt] : startDate
-  }}
+    newspaper: newspaper,
+    date: {
+      [Op.lt]: endDate,
+      [Op.gt]: startDate
+    }
+  };
 
-  let order = []
+  let order = [];
 
-  if (orderCriteria == "priority") {
-    order = [
-      ["newsIndex", "ASC"]
-    ]
+  if (orderCriteria == 'priority') {
+    order = [['newsIndex', 'ASC']];
   } else {
-    order = [
-      ["date", "DESC"]
-    ]
+    order = [['date', 'DESC']];
   }
 
-    return await NewScrapedSql.findAndCountAll({
-      where: query,
-      order
-    } as any);
- 
+  return await NewScrapedSql.findAndCountAll({
+    where: query,
+    order
+  } as any);
 }
-
 
 export const cleanUpForSaving = (newItem: NewScrapedI) => {
   if (!newItem.id || newItem.id == null) newItem.id = 'error';

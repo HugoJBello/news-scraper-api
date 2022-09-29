@@ -3,7 +3,7 @@ import { userValidation } from '../validations';
 import { Request, Response } from 'express';
 import Logger from '../lib/logger';
 import { NewScrapedI } from '../models/NewScraped';
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
@@ -85,24 +85,26 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
-
-
 //http://localhost:3000/api/v1/newScraped/findNewsInDay?newspaper=eldiario.es&day=2022-09-14&orderCriteria=priority
-export const findNewsInDay = async (req: Request, res: Response): Promise<void> => {
+export const findNewsInDay = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const params = req.query;
 
-  const day = moment.utc(params.day as string, "YYYY-MM-DD").toDate()
-  console.log("--------_", day);
-  
-  const newspaper = params.newspaper as string
-  const daysInterval = params.daysInterval as string
-  const orderCriteria = params.orderCriteria as string
+  const day = moment.utc(params.day as string, 'YYYY-MM-DD').toDate();
+  console.log('--------_', day);
 
+  const newspaper = params.newspaper as string;
+  const daysInterval = params.daysInterval as string;
+  const orderCriteria = params.orderCriteria as string;
 
   try {
     const result = await newsScrapedService.findNewsDay(
-      newspaper, day,  orderCriteria, daysInterval
+      newspaper,
+      day,
+      orderCriteria,
+      daysInterval
     );
     res.status(200).send({
       success: true,
@@ -117,7 +119,6 @@ export const findNewsInDay = async (req: Request, res: Response): Promise<void> 
     });
   }
 };
-
 
 //http://localhost:3000/api/v1/newScraped/saveOrUpdate
 export const saveOrUpdate = async (

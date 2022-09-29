@@ -37,13 +37,16 @@ export const saveOrUpdate = async (newScraped: NewScrapedI) => {
   newScrapedRepository.saveOrUpdate(newScraped);
 };
 
-
-
 export async function findNewsDay(
   newspaper: string,
   day: Date,
   order_criteria: string,
   daysInterval: string
 ): Promise<{ count: number; rows: NewScrapedSql[] }> {
-  return newScrapedRepository.findNewsDay(newspaper, day, order_criteria, daysInterval);
+  return newScrapedRepository.findNewsDay(
+    newspaper,
+    day,
+    order_criteria,
+    daysInterval
+  );
 }
