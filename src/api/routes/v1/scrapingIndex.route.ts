@@ -4,7 +4,7 @@ import { authorization } from '../../middlewares';
 
 const route: Router = Router();
 
-route.get('/find', [], (req: Request, res: Response) => {
+route.get('/find/:newspaper', [], (req: Request, res: Response) => {
   scrapingIndexController.get(req, res);
 });
 

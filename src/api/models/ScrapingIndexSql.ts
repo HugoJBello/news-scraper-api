@@ -11,6 +11,7 @@ export interface ScrapingIndexSqlI {
   newspaper: string;
   reviewsSource: string;
   startingUrls: string;
+  currentScrapingUrlList: string;
   scraperId: string;
   deviceId: string;
   id: number;
@@ -47,6 +48,9 @@ export const scrapingIndexSqlAttributes = {
   startingUrls: {
     type: DataTypes.STRING
   },
+  currentScrapingUrlList: {
+    type: DataTypes.STRING
+  },
   scraperId: {
     type: DataTypes.STRING
   },
@@ -70,16 +74,56 @@ export const convertToScrapingIndexSqlI = (
     const urls = indexSql.startingUrls;
     indexSql.startingUrls = urls.join(joiningStrUrls);
   }
+  if (
+    indexSql.currentScrapingUrlList &&
+    Array.isArray(indexSql.currentScrapingUrlList)
+  ) {
+    const urls = indexSql.currentScrapingUrlList;
+    indexSql.currentScrapingUrlList = urls.join(joiningStrUrls);
+  }
   return indexSql as ScrapingIndexSqlI;
 };
 
 export const convertScrapingIndexSqlI = (
   indexSql: ScrapingIndexSqlI,
-  scrapingUrls: ScrapingUrlsSqlI[]
+  startingUrls: ScrapingUrlsSqlI[]
 ): ScrapingIndexI => {
   const index = indexSql as any;
-  const urls = scrapingUrls.map((url) => url.url);
-  index.startingUrls = urls;
+  const starting = startingUrls.map((url) => url.url);
+  index.startingUrls = starting;
+
+  if (
+    index.currentScrapingUrlList &&
+    index.currentScrapingUrlList.includes(joiningStrUrls)
+  ) {
+    index.currentScrapingUrlList =
+      index.currentScrapingUrlList.split(joiningStrUrls);
+  }
+
+  return index as ScrapingIndexI;
+};
+
+export const convertScrapingIndexSqlIApi = (
+  indexSql: ScrapingIndexSql
+): ScrapingIndexI => {
+  const index = indexSql as any;
+
+  if (
+    index.currentScrapingUrlList &&
+    index.currentScrapingUrlList.includes(joiningStrUrls)
+  ) {
+    index.currentScrapingUrlList =
+      index.currentScrapingUrlList.split(joiningStrUrls);
+  } else {
+    index.currentScrapingUrlList = [index.currentScrapingUrlList]
+  }
+
+  if (index.startingUrls && index.startingUrls.includes(joiningStrUrls)) {
+    index.startingUrls = index.startingUrls.split(joiningStrUrls);
+  } else {
+    index.startingUrls = [index.startingUrls]
+  }
+
   return index as ScrapingIndexI;
 };
 
@@ -88,7 +132,7 @@ export const obtainScrapingIUrlsSqlI = (
 ): ScrapingUrlsSqlI[] => {
   const newspaper = index.newspaper;
   const scraperId = index.scraperId;
-
+  
   return index.startingUrls.map((url) => {
     const scrapingUrl: ScrapingUrlsSqlI = {} as ScrapingUrlsSqlI;
     scrapingUrl.url = url;

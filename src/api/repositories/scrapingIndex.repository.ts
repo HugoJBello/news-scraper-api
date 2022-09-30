@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ScrapingIndexI } from '../models/ScrapingIndex';
 import {
+  convertToScrapingIndexSqlI,
   obtainScrapingIUrlsSqlI,
   ScrapingIndexSql,
   ScrapingIndexSqlI
 } from '../models/ScrapingIndexSql';
 import { ScrapingUrlsSql } from '../models/ScrapingUrlSql';
 
-export async function findOne(id: string): Promise<ScrapingIndexSql> {
-  return await ScrapingIndexSql.findOne({ where: { id: id } } as any);
+export async function findOne(newspaper: string): Promise<ScrapingIndexSql> {
+  return await ScrapingIndexSql.findOne({ where: { newspaper: newspaper } } as any);
 }
 
 export async function findQuery(
@@ -33,18 +34,6 @@ export async function findQuery(
   }
 }
 
-export const joiningStrUrls = '=====';
-
-export const convertToScrapingIndexSqlI = (
-  index: ScrapingIndexI
-): ScrapingIndexSqlI => {
-  const indexSql = index as any;
-  if (indexSql.startingUrls && Array.isArray(indexSql.startingUrls)) {
-    const urls = indexSql.startingUrls;
-    indexSql.startingUrls = urls.join(joiningStrUrls);
-  }
-  return indexSql as ScrapingIndexSqlI;
-};
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function saveOrUpdate(index: ScrapingIndexI) {

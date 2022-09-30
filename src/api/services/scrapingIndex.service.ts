@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { scrapingIndex } from '../repositories';
-import { ScrapingIndexSql } from '../models/ScrapingIndexSql';
+import { ScrapingIndexSql, convertScrapingIndexSqlIApi } from '../models/ScrapingIndexSql';
 import { ScrapingIndexI } from '../models/ScrapingIndex';
 
-export function findOne(params: { id: string }): Promise<ScrapingIndexSql> {
+export function findOne(params: { newspaper: string }): Promise<ScrapingIndexI> {
   return new Promise(async (resolve, reject) => {
     try {
       console.log(params);
-      const news = await scrapingIndex.findOne(params.id);
-      console.log(news);
-      resolve(news);
+      const index = await scrapingIndex.findOne(params.newspaper);
+      const coverted = convertScrapingIndexSqlIApi(index)
+      console.log(coverted);
+      resolve(coverted);
     } catch (err) {
       console.log(err);
       reject(err);
@@ -30,6 +31,7 @@ export const findQuery = async (
     offset,
     limit
   );
+  rows.map(index => convertScrapingIndexSqlIApi(index))
   console.log({ count, rows });
   return { count, rows };
 };
