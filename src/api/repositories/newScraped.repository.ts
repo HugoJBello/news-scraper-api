@@ -38,7 +38,8 @@ export async function findNewsDay(
   newspaper: string,
   day: Date,
   orderCriteria: string,
-  daysInterval: string
+  daysInterval: string,
+  scraperId: string | null | undefined,
 ): Promise<{ count: number; rows: NewScrapedSql[] }> {
   const endDate = day as any;
   //endDate = moment(endDate).format('YYYY-MM-DD').split(" ")[0];
@@ -50,13 +51,26 @@ export async function findNewsDay(
     startDate.setDate(startDate.getDate() - daysIntervalInt)
   );
   //startDate = moment(startDate).format('YYYY-MM-DD').split(" ")[0];
-  const query = {
-    newspaper: newspaper,
-    date: {
-      [Op.lt]: endDate,
-      [Op.gt]: startDate
-    }
-  };
+  let query = {} as any
+  if (scraperId){
+    query = {
+      newspaper: newspaper,
+      scraperId: scraperId,
+      date: {
+        [Op.lt]: endDate,
+        [Op.gt]: startDate
+      }
+    };
+  } else {
+    query = {
+      newspaper: newspaper,
+      date: {
+        [Op.lt]: endDate,
+        [Op.gt]: startDate
+      }
+    };
+  }
+  
 
   let order = [];
 

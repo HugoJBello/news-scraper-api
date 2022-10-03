@@ -41,12 +41,14 @@ export async function findNewsDay(
   newspaper: string,
   day: Date,
   order_criteria: string,
-  daysInterval: string
+  daysInterval: string,
+  scraperId: string | null | undefined
 ): Promise<{ count: number; rows: NewScrapedSql[] }> {
   return newScrapedRepository.findNewsDay(
     newspaper,
     day,
     order_criteria,
-    daysInterval
+    daysInterval, 
+    scraperId
   );
 }

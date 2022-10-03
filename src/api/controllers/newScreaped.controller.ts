@@ -85,7 +85,7 @@ export const findQuery = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-//http://localhost:3000/api/v1/newScraped/findNewsInDay?newspaper=eldiario.es&day=2022-09-14&orderCriteria=priority
+//http://localhost:3000/api/v1/newScraped/findNewsInDay?newspaper=eldiario.es&day=2022-10-03&orderCriteria=priority&daysInterval=2&scraperId=scraperTest
 export const findNewsInDay = async (
   req: Request,
   res: Response
@@ -98,13 +98,15 @@ export const findNewsInDay = async (
   const newspaper = params.newspaper as string;
   const daysInterval = params.daysInterval as string;
   const orderCriteria = params.orderCriteria as string;
+  const scraperId = params.scraperId as string | null | undefined;
 
   try {
     const result = await newsScrapedService.findNewsDay(
       newspaper,
       day,
       orderCriteria,
-      daysInterval
+      daysInterval,
+      scraperId
     );
     res.status(200).send({
       success: true,
