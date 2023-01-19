@@ -7,11 +7,13 @@ export interface ScrapingIndexI {
   newspaper: string;
   reviewsSource: string;
   startingUrls: string[];
+  currentScrapingIdList: string[];
   currentScrapingUrlList: string[];
   scraperId: string;
   deviceId: string;
-  id: number;
-  scrapingIteration: number;
+  id:number;
+  scrapingIteration:number;
 }
 
-export const joiningStr = '=====';
+export const joiningStr = "====="
+
