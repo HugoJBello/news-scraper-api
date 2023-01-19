@@ -3,3 +3,6 @@ dist
 .env
 logs
 .nyc_output
+
+
+database_news.sqlite3
