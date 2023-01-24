@@ -103,19 +103,19 @@ export const convertToNewsScrapedSqlI = (newScrapedI: NewScrapedI): NewScrapedSq
 
 export const convertNewsScrapedSqlI = (newScrapedSqlI: NewScrapedSqlI): NewScrapedI => {
     const index = newScrapedSqlI as any
-    if (newScrapedSqlI.tags.includes(joiningStrtags)) {
+    if (newScrapedSqlI.tags && newScrapedSqlI.tags.includes(joiningStrtags)) {
         const tags = newScrapedSqlI.tags
         index.tags =  tags.split(joiningStrtags)
     } else {
         index.tags = [newScrapedSqlI.tags]
     }
-    if (newScrapedSqlI.figuresUrl.includes(joiningStrFigures)) {
+    if (newScrapedSqlI.figuresUrl && newScrapedSqlI.figuresUrl.includes(joiningStrFigures)) {
         const figuresUrl = newScrapedSqlI.figuresUrl
         index.figuresUrl =  figuresUrl.split(joiningStrFigures)
     } else {
         index.figuresUrl = [newScrapedSqlI.figuresUrl]
     }
-    if (newScrapedSqlI.figuresText.includes(joiningStrFigures)) {
+    if (newScrapedSqlI.figuresText && newScrapedSqlI.figuresText.includes(joiningStrFigures)) {
         const figuresText = newScrapedSqlI.figuresText
         index.figuresText =  figuresText.split(joiningStrFigures)
     } else{
