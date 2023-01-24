@@ -126,3 +126,11 @@ export const convertNewsScrapedSqlI = (newScrapedSqlI: NewScrapedSqlI): NewScrap
     
     return index as NewScrapedI
 }
+
+
+export const convertScrapingNewsSqlIApi = (
+    newScrapedSql: NewScrapedSql
+  ): NewScrapedI => {
+    const index = newScrapedSql as any;
+    return convertNewsScrapedSqlI(index)
+  };

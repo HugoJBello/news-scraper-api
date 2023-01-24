@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { newScrapedRepository } from '../repositories';
-import { NewScrapedSql } from '../models/NewScrapedSql';
+import { convertScrapingNewsSqlIApi, NewScrapedSql } from '../models/NewScrapedSql';
 import { NewScrapedI } from '../models/NewScraped';
 
 export function findOne(params: { id: string }): Promise<NewScrapedSql> {
@@ -29,6 +29,8 @@ export const findQuery = async (
     offset,
     limit
   );
+  rows.map(item => convertScrapingNewsSqlIApi(item))
+
   console.log({ count, rows });
   return { count, rows };
 };
