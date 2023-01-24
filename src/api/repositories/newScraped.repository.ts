@@ -44,8 +44,7 @@ export async function findNewsDay(
   const endDate = day as any;
   //endDate = moment(endDate).format('YYYY-MM-DD').split(" ")[0];
   const daysIntervalInt = parseInt(daysInterval);
-  console.log('-----', daysInterval);
-
+ 
   let startDate = new Date(endDate.getTime()) as any;
   startDate = new Date(
     startDate.setDate(startDate.getDate() - daysIntervalInt)
