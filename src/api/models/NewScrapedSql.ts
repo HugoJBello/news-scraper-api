@@ -117,7 +117,7 @@ export const convertNewsScrapedSqlI = (newScrapedSqlI: NewScrapedSqlI): NewScrap
     } else {
         index.tags = [newScrapedSqlI.tags]
     }
-    if (newScrapedSqlI.sections.includes(joiningStrtags)) {
+    if (newScrapedSqlI.sections && newScrapedSqlI.sections.includes(joiningStrtags)) {
         const sections = newScrapedSqlI.sections
         index.sections =  sections.split(joiningStrtags)
     } else {
