@@ -13,6 +13,7 @@ export interface NewScrapedSqlI {
     content: string
     headline: string
     tags: string
+    sections: string
     figuresUrl: string
     figuresText: string
     url: string
@@ -60,6 +61,9 @@ export const newScrapedSqlAttributes = {
     tags:{
         type: DataTypes.STRING,
     },
+    sections:{
+        type: DataTypes.STRING,
+    },
     figuresUrl:{
         type: DataTypes.STRING,
     },
@@ -90,6 +94,10 @@ export const convertToNewsScrapedSqlI = (newScrapedI: NewScrapedI): NewScrapedSq
         const tags = newScrapedSql.tags
         newScrapedSql.tags =  tags.join(joiningStrtags)
     }
+    if (newScrapedSql.sections && Array.isArray(newScrapedSql.sections)){
+        const sections = newScrapedSql.sections
+        newScrapedSql.sections =  sections.join(joiningStrtags)
+    }
     if (newScrapedSql.figuresUrl && Array.isArray(newScrapedSql.figuresUrl)){
         const figuresUrl = newScrapedSql.figuresUrl
         newScrapedSql.figuresUrl =  figuresUrl.join(joiningStrFigures)
@@ -103,30 +111,34 @@ export const convertToNewsScrapedSqlI = (newScrapedI: NewScrapedI): NewScrapedSq
 
 export const convertNewsScrapedSqlI = (newScrapedSqlI: NewScrapedSqlI): NewScrapedI => {
     const index = newScrapedSqlI as any
-    if (newScrapedSqlI.tags && newScrapedSqlI.tags.includes(joiningStrtags)) {
+    if (newScrapedSqlI.tags.includes(joiningStrtags)) {
         const tags = newScrapedSqlI.tags
         index.tags =  tags.split(joiningStrtags)
     } else {
         index.tags = [newScrapedSqlI.tags]
     }
-    if (newScrapedSqlI.figuresUrl && newScrapedSqlI.figuresUrl.includes(joiningStrFigures)) {
+    if (newScrapedSqlI.sections.includes(joiningStrtags)) {
+        const sections = newScrapedSqlI.sections
+        index.sections =  sections.split(joiningStrtags)
+    } else {
+        index.sections = [newScrapedSqlI.sections]
+    }
+    
+    if (newScrapedSqlI.figuresUrl.includes(joiningStrFigures)) {
         const figuresUrl = newScrapedSqlI.figuresUrl
         index.figuresUrl =  figuresUrl.split(joiningStrFigures)
     } else {
         index.figuresUrl = [newScrapedSqlI.figuresUrl]
     }
-    if (newScrapedSqlI.figuresText && newScrapedSqlI.figuresText.includes(joiningStrFigures)) {
+    if (newScrapedSqlI.figuresText.includes(joiningStrFigures)) {
         const figuresText = newScrapedSqlI.figuresText
         index.figuresText =  figuresText.split(joiningStrFigures)
     } else{
         index.figuresText =  [newScrapedSqlI.figuresText]
 
     }
-    console.log(index.figuresText);
-    
     return index as NewScrapedI
 }
-
 
 export const convertScrapingNewsSqlIApi = (
     newScrapedSql: NewScrapedSql
