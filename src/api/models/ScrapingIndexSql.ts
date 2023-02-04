@@ -16,6 +16,7 @@ export interface ScrapingIndexSqlI {
   scraperId: string;
   deviceId: string;
   logoUrl: string;
+  tag: string;
   id: number;
   scrapingIteration: number;
 }
@@ -65,11 +66,13 @@ export const scrapingIndexSqlAttributes = {
   logoUrl: {
     type: DataTypes.STRING
   },
+  tag: {
+    type: DataTypes.STRING
+  },
   scrapingIteration: {
     type: DataTypes.NUMBER
   }
 };
-
 export const joiningStrUrls = '=====';
 
 export class ScrapingIndexSql extends Model<ScrapingIndexSqlI> {}
