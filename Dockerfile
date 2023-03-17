@@ -1,19 +1,19 @@
 # from base image node
 FROM node:15-slim
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-# copying all the files from your file system to container file system
-COPY package.json .
-
+WORKDIR /app
+COPY . .
+ 
 # install all dependencies
-RUN npm install
+RUN npm i
 
 RUN npm i sqlite3
 
+RUN npm run build
+
+
 # copy other files as well
-COPY ./ .
+ 
 
 #expose the port
 EXPOSE 3000
