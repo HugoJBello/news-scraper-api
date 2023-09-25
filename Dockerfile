@@ -1,7 +1,6 @@
 # from base image node
 FROM node:15-slim
 
-WORKDIR /app
 COPY . .
  
 # install all dependencies
