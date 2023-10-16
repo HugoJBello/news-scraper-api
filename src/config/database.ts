@@ -20,8 +20,12 @@ import Logger from '../api/lib/logger';
 function customLog(msg: string) {
   Logger.debug(msg);
 }
+
+const path = require('path');
+const dbPath = path.resolve(__dirname, 'database_news.sqlite3')
+
 export const db = new Sequelize({
-  storage: './database_news.sqlite3',
+  storage: dbPath,
   dialect: 'sqlite'
 });
 
