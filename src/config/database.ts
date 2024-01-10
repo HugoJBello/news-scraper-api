@@ -24,11 +24,24 @@ function customLog(msg: string) {
 const path = require('path');
 const dbPath = path.resolve(__dirname, 'database_news.sqlite3')
 
-export const db = new Sequelize({
-  storage: dbPath,
-  dialect: 'sqlite'
-});
-
+if (process.env.DB_TYPE == "mysql") {
+    export const db = new Sequelize(
+        process.env.DB_NAME as string,
+        process.env.DB_USER as string,
+        process.env.DB_HOST as string,
+        {
+            host: process.env.DB_HOST as string,
+            dialect: 'mysql'
+        }
+    );
+    console.log("Using mysql db")
+} else {
+    export const db = new Sequelize({
+        storage: dbPath,
+        dialect: 'sqlite'
+    });
+    console.log("Using sqlite db")
+}
 export default async function syncDB(): Promise<Sequelize> {
   await initDb();
   return await db.sync();
