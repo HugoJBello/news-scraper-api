@@ -31,16 +31,16 @@ export const scrapingIndexSqlAttributes = {
     type: DataTypes.DATE
   },
   urlIndex: {
-    type: DataTypes.NUMBER
+    type: DataTypes.INTEGER
   },
   pageNewIndex: {
-    type: DataTypes.NUMBER
+    type: DataTypes.INTEGER
   },
   pageIndexSection: {
-    type: DataTypes.NUMBER
+    type: DataTypes.INTEGER
   },
   maxPages: {
-    type: DataTypes.NUMBER
+    type: DataTypes.INTEGER
   },
   newspaper: {
     type: DataTypes.STRING
@@ -49,13 +49,13 @@ export const scrapingIndexSqlAttributes = {
     type: DataTypes.STRING
   },
   startingUrls: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   currentScrapingUrlList: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   currentScrapingIdList: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   scraperId: {
     type: DataTypes.STRING
@@ -64,13 +64,13 @@ export const scrapingIndexSqlAttributes = {
     type: DataTypes.STRING
   },
   logoUrl: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   tag: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   scrapingIteration: {
-    type: DataTypes.NUMBER
+    type: DataTypes.INTEGER
   }
 };
 export const joiningStrUrls = '=====';

@@ -1,4 +1,5 @@
 import Logger from './api/lib/logger';
+import 'dotenv/config'
 import { syncDB } from './config';
 import { Server } from 'net';
 import { Application } from 'express';

@@ -35,13 +35,13 @@ export const newScrapedSqlAttributes = {
         type: DataTypes.STRING,
     },
     author: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     date: {
         type: DataTypes.DATE,
@@ -50,37 +50,37 @@ export const newScrapedSqlAttributes = {
         type: DataTypes.DATE,
     },
     content: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     contentMarkdown: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     headline: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     tags:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     sections:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     figuresUrl:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     figuresText:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     url: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     },
     scraperId: {
         type: DataTypes.STRING,
     },
     newsIndex: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
     },
     scrapingIteration: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
     }
 } as any
 

@@ -17,7 +17,7 @@ export const scrapingUrlSqlAttributes = {
     type: DataTypes.STRING
   },
   url: {
-    type: DataTypes.STRING
+    type: DataTypes.TEXT
   },
   newspaper: {
     type: DataTypes.STRING
