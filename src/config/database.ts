@@ -26,6 +26,8 @@ const dbPath = path.resolve(__dirname, 'database_news.sqlite3')
 
 export let database: any = null
 
+console.log(process.env.DB_HOST)
+
 if (process.env.DB_TYPE == "mysql") {
     database = new Sequelize(
         process.env.DB_NAME as string,
