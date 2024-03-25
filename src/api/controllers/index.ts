@@ -4,6 +4,7 @@ import * as newScrapedController from './newScreaped.controller';
 import * as globalConfigController from './globalConfig.controller';
 import * as scrapingIndexController from './scrapingIndex.controller';
 import * as scrapingUrlController from './scrapingUrl.controller';
+import * as resultsInNewspaperController from './resultsInNewspaper.controller';
 
 export {
   userController,
@@ -11,5 +12,6 @@ export {
   newScrapedController,
   globalConfigController,
   scrapingIndexController,
-  scrapingUrlController
+  scrapingUrlController, 
+  resultsInNewspaperController
 };

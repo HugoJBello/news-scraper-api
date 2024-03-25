@@ -1,19 +1,29 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { scrapingIndex } from '../repositories';
+import { scrapingIndex, newScrapedRepository } from '../repositories';
 import { ScrapingIndexSql, convertScrapingIndexSqlIApi } from '../models/ScrapingIndexSql';
 import { ScrapingIndexI } from '../models/ScrapingIndex';
+import { NewScrapedI } from '../models/NewScraped';
+import { convertScrapingNewsSqlIApi } from '../models/NewScrapedSql';
+import { ResultsInNewspaper } from '../models/ResultsInNewspaper';
 
-export function findOne(params: { newspaper: string }): Promise<ScrapingIndexI> {
-  return new Promise(async (resolve, reject) => {
+export const findResultsinNewspaper = async (params: { newspaper: string }): Promise<ResultsInNewspaper> => {
     try {
-      console.log(params);
       const index = await scrapingIndex.findOne(params.newspaper);
-      const coverted = convertScrapingIndexSqlIApi(index)
-      console.log(coverted);
-      resolve(coverted);
+      const convertedIndex = convertScrapingIndexSqlIApi(index)
+
+      const idsList = convertedIndex.currentScrapingIdList
+      console.log(idsList)
+
+      const news =  await newScrapedRepository.findManyIds(idsList)
+      const result = {} as ResultsInNewspaper
+
+      const converted = news.map(item => convertScrapingNewsSqlIApi(item))
+      result.scrapingIndex = convertedIndex
+      result.news = converted
+
+      return result
     } catch (err) {
       console.log(err);
-      reject(err);
+      return {} as ResultsInNewspaper
     }
-  });
 }

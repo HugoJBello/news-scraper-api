@@ -6,12 +6,13 @@ import { NewScrapedI } from '../models/NewScraped';
 import { ScrapingConfigI } from '../models/ScrapingConfig';
 import { ScrapingIndexI } from '../models/ScrapingIndex';
 
-//http://localhost:3000/api/v1/resultsInNewspaper/find/eldiario.es
+//http://localhost:3000/api/v1/resultsInNewspaper/find?newspaper=eldiario.es
 export async function get(req: Request, res: Response): Promise<void> {
   const params = req.query;
-  if (params.id) {
+  console.log(params)
+  if (params.newspaper) {
     const newspaper: string = params.newspaper as string;
-    const result = await resultsInNewspaperService.findOne({ newspaper }).catch((err) => {
+    const result = await resultsInNewspaperService.findResultsinNewspaper({ newspaper }).catch((err:any) => {
       Logger.error(err);
       res.status(400);
     });

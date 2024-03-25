@@ -8,6 +8,15 @@ import {
   NewScrapedSql
 } from '../models/NewScrapedSql';
 
+export async function findManyIds(ids: string[]): Promise<NewScrapedSql[]> {
+  return await NewScrapedSql.findAll({
+    where: {
+      id: ids
+    } as any
+  });
+}
+
+
 export async function findOne(id: string): Promise<NewScrapedSql> {
   return await NewScrapedSql.findOne({ where: { id: id } } as any);
 }
@@ -44,7 +53,6 @@ export async function findNewsDay(
   const endDate = day as any;
   //endDate = moment(endDate).format('YYYY-MM-DD').split(" ")[0];
   const daysIntervalInt = parseInt(daysInterval);
-  console.log('-----', daysInterval);
 
   let startDate = new Date(endDate.getTime()) as any;
   startDate = new Date(

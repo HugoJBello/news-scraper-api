@@ -13,8 +13,20 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      #- db:/var/lib/mysql
+      - db:/var/lib/mysql
       - /init.sql:/docker-entrypoint-initdb.d/init.sql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
   api:
     container_name: api
     build:
