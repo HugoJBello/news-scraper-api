@@ -1,14 +1,23 @@
-export interface ScrapingConfigI {
+
+
+export interface ScrapingConfigI{
   scraperId: string;
+  apiUrl: string;
   appId: string;
-  deviceId: string;
-  newspapers: string[];
+  deviceId:string;
+  newspapers:string[];
   useSqliteDb: boolean;
   useMongoDb: boolean;
-  scrapingSettings: Map<string, ScrapingSettings>;
+  waitOnIteration: number;
+  waitMinutes: number;
+  scrapingSettings: Map<string, ScrapingSettings> | any;
+
 }
 
-export interface ScrapingSettings {
+export interface ScrapingSettings{
   maxPages: number;
-  startingUrls: string[];
+  startingUrls:string[];
+  logoUrl: string;
+  tag: string;
+  
 }

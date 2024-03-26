@@ -6,6 +6,7 @@ export interface ScrapingIndexSqlI {
   dateScraping: Date;
   urlIndex: number;
   pageNewIndex: number;
+  pageNewTotal: number;
   pageIndexSection: number;
   maxPages: number;
   newspaper: string;
@@ -34,6 +35,9 @@ export const scrapingIndexSqlAttributes = {
     type: DataTypes.INTEGER
   },
   pageNewIndex: {
+    type: DataTypes.INTEGER
+  },
+  pageNewTotal: {
     type: DataTypes.INTEGER
   },
   pageIndexSection: {
