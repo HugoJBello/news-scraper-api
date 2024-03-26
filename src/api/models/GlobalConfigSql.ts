@@ -31,7 +31,7 @@ export const globalConfigSqlAttributes = {
         type: DataTypes.STRING,
     },
     globalIteration: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
     },
     deviceId: {
         type: DataTypes.STRING,
