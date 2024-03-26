@@ -4,5 +4,5 @@ dist
 logs
 .nyc_output
 
-
+db/
 database_news.sqlite3
