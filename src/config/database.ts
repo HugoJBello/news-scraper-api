@@ -74,8 +74,9 @@ export const initDb = async () => {
     sequelize: db // this bit is important
   });
 
-  await NewScrapedSql.sync({ force: false });
-  await ScrapingIndexSql.sync({ force: false });
-  await ScrapingUrlsSql.sync({ force: false });
-  await GlobalConfigSql.sync({ force: false });
+  const alter = true
+  await NewScrapedSql.sync({ force: false, alter:alter });
+  await ScrapingIndexSql.sync({ force: false, alter:alter });
+  await ScrapingUrlsSql.sync({ force: false, alter:alter });
+  await GlobalConfigSql.sync({ force: false, alter:alter });
 };
