@@ -40,7 +40,7 @@ export const globalConfigSqlAttributes = {
         type: DataTypes.STRING,
     },
     lastLog: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
     }
 }
 
