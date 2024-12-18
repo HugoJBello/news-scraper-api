@@ -12,11 +12,14 @@ export interface NewScrapedI {
   headline: string
   description: string
   tags: string[]
+  sections: string[]
   figuresUrl: string[]
   figuresText: string[]
   url: string
   scraperId: string
   scrapingIteration: number
   id: string
+  status: string
+  log:string
   newsIndex: number
 }

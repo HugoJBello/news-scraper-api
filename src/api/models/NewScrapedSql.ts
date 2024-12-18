@@ -76,6 +76,12 @@ export const newScrapedSqlAttributes = {
     scraperId: {
         type: DataTypes.STRING,
     },
+    status: {
+        type: DataTypes.STRING,
+    },
+    log: {
+        type: DataTypes.STRING,
+    },
     newsIndex: {
         type: DataTypes.INTEGER,
     },
