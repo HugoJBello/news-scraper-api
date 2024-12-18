@@ -20,6 +20,8 @@ export interface NewScrapedSqlI {
     scraperId: string
     scrapingIteration: number
     id: string
+    status: string
+    log:string
     newsIndex: number
 }
 
